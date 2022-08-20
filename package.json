@@ -14,8 +14,13 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx}": [
-      "eslint '*/**/*.{js,jsx}' --fix"
+    "**/*.{js,jsx,ts,tsx}": [
+      "tsc --noEmit",
+      "eslint --ext .js,.jsx,.ts,.tsx"
+    ],
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
+      "prettier --write",
+      "git add"
     ]
   },
   "dependencies": {
