@@ -4,6 +4,9 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   assetPrefix: isProd ? '/973891422.github.io/' : '',
-  images: { loader: 'custom' },
+  images: {
+    loader: 'cloudinary',
+    path: '/',
+  },
 }
 module.exports = nextConfig
