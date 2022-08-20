@@ -3,24 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prepare": "husky install",
     "dev": "next dev",
     "build": "next build  && next export",
     "start": "next start",
     "lint": "next lint"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "tsc --noEmit --skipLibCheck"
+    ],
     "**/*.{js,jsx,ts,tsx}": [
-      "tsc --noEmit",
       "eslint --ext .js,.jsx,.ts,.tsx"
     ],
     "**/*.{js,jsx,tsx,ts,less,md,json}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "dependencies": {
