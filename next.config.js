@@ -3,6 +3,7 @@ const isProd = process.env.NODE_ENV === 'production'
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  assetPrefix: isProd ? '/973891422.github.io/' : ''
+  assetPrefix: isProd ? '/973891422.github.io/' : '',
+  images: { loader: 'custom' },
 }
 module.exports = nextConfig
