@@ -1,16 +1,18 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { AuthorProvider } from '../context/author-context'
-import { appWithTranslation } from 'next-i18next'
+import { NextIntlProvider } from 'next-intl'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <AuthorProvider>
-        <Component {...pageProps} />
-      </AuthorProvider>
+      <NextIntlProvider messages={pageProps.messages}>
+        <AuthorProvider>
+          <Component {...pageProps} />
+        </AuthorProvider>
+      </NextIntlProvider>
     </>
   )
 }
 
-export default appWithTranslation(MyApp)
+export default MyApp

@@ -5,8 +5,8 @@ import Date from '../components/date'
 import Layout from '../components/layout'
 import { getSortedPostsData } from '../utils/posts'
 import { useAuthor } from './../context/author-context'
-import { MoonIcon, SunIcon } from '@heroicons/react/24/solid'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslations } from 'next-intl'
+import Theme from '../components/Theme'
 
 export const getStaticProps: GetStaticProps = async ({
   locale,
@@ -16,10 +16,9 @@ export const getStaticProps: GetStaticProps = async ({
   const allPostsData = getSortedPostsData()
   return {
     props: {
-      ...(await serverSideTranslations(locale ?? defaultLocale ?? 'zh', [
-        'common',
-        'footer',
-      ])),
+      messages: (
+        await import(`../messages/${locale ?? defaultLocale ?? 'zh'}.json`)
+      ).default,
       allPostsData,
     },
   }
@@ -33,19 +32,9 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ allPostsData }) => {
-  const { author, theme, setTheme } = useAuthor()
-  const onThemeIconClicked = () => {
-    if (
-      theme === 'dark' ||
-      window.matchMedia('(prefers-color-scheme: dark)').matches
-    ) {
-      document.documentElement.classList.remove('dark')
-      setTheme('normal')
-    } else {
-      document.documentElement.classList.add('dark')
-      setTheme('dark')
-    }
-  }
+  const { author } = useAuthor()
+  const t = useTranslations('Site')
+
   return (
     <Layout isHome>
       <div>
@@ -55,15 +44,10 @@ const Home: NextPage<Props> = ({ allPostsData }) => {
 
         <section className="text-center text-xl leading-normal">
           <p>你好，我是 Furia</p>
-          <button onClick={onThemeIconClicked}>
-            {theme === 'normal' ? (
-              <MoonIcon className="h-6 w-6 text-blue-500"></MoonIcon>
-            ) : (
-              <SunIcon className="h-6 w-6 text-blue-500"></SunIcon>
-            )}
-          </button>
-          <p>一个又菜又爱玩的前端小白，欢迎来到我的博客！</p>
+
+          <p>一个又菜又爱玩的前端小白，欢迎来到我的{t('title')}！</p>
         </section>
+        <Theme></Theme>
 
         <section className="pt-4 text-xl leading-normal">
           <h2 className=" my-4 text-2xl font-bold">Blog</h2>

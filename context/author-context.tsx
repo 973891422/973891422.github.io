@@ -1,15 +1,15 @@
 import { createContext, ReactNode, useContext, useState } from 'react'
 
-type theme = 'normal' | 'dark'
+export type ThemeType = 'normal' | 'dark' | 'os'
 type AuthorContextType = {
   author: 'Furia'
-  theme: theme
-  setTheme: (theme: theme) => void
+  theme: ThemeType
+  setTheme: (theme: ThemeType) => void
 }
 
 const initialContextValue = {
   author: 'Furia',
-  theme: 'normal',
+  theme: 'os',
   setTheme: () => {
     // do nothing
   },
@@ -26,7 +26,7 @@ type Props = {
 }
 
 export function AuthorProvider({ children }: Props) {
-  const [theme, setTheme] = useState<theme>(initialContextValue.theme)
+  const [theme, setTheme] = useState<ThemeType>(initialContextValue.theme)
   const value = {
     author: initialContextValue.author,
     theme,
