@@ -6,7 +6,24 @@ import Layout from '../components/layout'
 import { getSortedPostsData } from '../utils/posts'
 import { useAuthor } from './../context/author-context'
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
+export const getStaticProps: GetStaticProps = async ({
+  locale,
+  defaultLocale,
+}) => {
+  // 获取文章列表
+  const allPostsData = getSortedPostsData()
+  return {
+    props: {
+      ...(await serverSideTranslations(locale ?? defaultLocale ?? 'zh', [
+        'common',
+        'footer',
+      ])),
+      allPostsData,
+    },
+  }
+}
 interface Props {
   allPostsData: {
     date: string
@@ -67,17 +84,6 @@ const Home: NextPage<Props> = ({ allPostsData }) => {
       </div>
     </Layout>
   )
-}
-
-export const getStaticProps: GetStaticProps = async () => {
-  // 获取文章列表
-  const allPostsData = getSortedPostsData()
-
-  return {
-    props: {
-      allPostsData,
-    },
-  }
 }
 
 export default Home
