@@ -1,5 +1,11 @@
 {
   "Site": {
-    "title": "Blog"
+    "title": "Blog",
+    "theme": {
+      "title": "theme",
+      "os": "follow os",
+      "normal": "normal",
+      "dark": "dark"
+    }
   }
 }
