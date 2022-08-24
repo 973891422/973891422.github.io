@@ -2,8 +2,10 @@ import type { GetStaticProps, NextPage } from 'next'
 import Link from 'next/link'
 import Head from 'next/head'
 import Date from '../components/date'
-import Layout, { siteTitle } from '../components/layout'
+import Layout from '../components/layout'
 import { getSortedPostsData } from '../utils/posts'
+import { useAuthor } from './../context/author-context'
+import { MoonIcon, SunIcon } from '@heroicons/react/24/solid'
 
 interface Props {
   allPostsData: {
@@ -14,20 +16,40 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ allPostsData }) => {
+  const { author, theme, setTheme } = useAuthor()
+  const onThemeIconClicked = () => {
+    if (
+      theme === 'dark' ||
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    ) {
+      document.documentElement.classList.remove('dark')
+      setTheme('normal')
+    } else {
+      document.documentElement.classList.add('dark')
+      setTheme('dark')
+    }
+  }
   return (
     <Layout isHome>
       <div>
         <Head>
-          <title>{siteTitle}</title>
+          <title>{author + "' Blog"}</title>
         </Head>
 
-        <section className="text-xl leading-normal text-center">
+        <section className="text-center text-xl leading-normal">
           <p>你好，我是 Furia</p>
+          <button onClick={onThemeIconClicked}>
+            {theme === 'normal' ? (
+              <MoonIcon className="h-6 w-6 text-blue-500"></MoonIcon>
+            ) : (
+              <SunIcon className="h-6 w-6 text-blue-500"></SunIcon>
+            )}
+          </button>
           <p>一个又菜又爱玩的前端小白，欢迎来到我的博客！</p>
         </section>
 
-        <section className="text-xl leading-normal pt-4">
-          <h2 className=" text-2xl my-4 font-bold">Blog</h2>
+        <section className="pt-4 text-xl leading-normal">
+          <h2 className=" my-4 text-2xl font-bold">Blog</h2>
           <ul>
             {allPostsData.map(({ id, date, title }) => (
               <li key={id} className="mb-5">

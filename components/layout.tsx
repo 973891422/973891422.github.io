@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 const name = 'Furia' // 名称，根据需要修改
-export const siteTitle = 'Furia Blog' // 网站标题，根据需要修改
+export const siteTitle = "Furia's Blog" // 网站标题，根据需要修改
 
 interface Props {
   children: React.ReactNode
@@ -12,7 +12,7 @@ interface Props {
 
 export default function Layout({ children, isHome }: Props) {
   return (
-    <div className="max-w-2xl mx-auto px-4 mt-12 mb-24">
+    <div className="mx-auto mt-12 mb-24 max-w-2xl px-4">
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="AiljxBlog——Ailjx的博客" />
@@ -36,7 +36,7 @@ export default function Layout({ children, isHome }: Props) {
               width={144}
               alt={name}
             />
-            <h1 className="text-5xl font-extrabold tracking-tighter my-4">
+            <h1 className="my-4 text-5xl font-extrabold tracking-tighter">
               {name}
             </h1>
           </>
@@ -54,7 +54,7 @@ export default function Layout({ children, isHome }: Props) {
                 />
               </a>
             </Link>
-            <h2 className="text-2xl my-4">
+            <h2 className="my-4 text-2xl">
               <Link href="/">
                 <a>{name}</a>
               </Link>
