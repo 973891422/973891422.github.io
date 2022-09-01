@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.root,
+#root,
+#docs-root {
+    --btn-text-case: capitalize;
+}

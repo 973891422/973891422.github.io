@@ -28,17 +28,17 @@ export default function Layout({ children, isHome }: Props) {
       <header className="flex flex-col items-center">
         {isHome ? (
           <>
-            <Image
+            {/* <Image
               priority
               src="/images/profile.jfif"
               className="rounded-full"
               height={144}
               width={144}
               alt={name}
-            />
-            <h1 className="my-4 text-5xl font-extrabold tracking-tighter">
+            /> */}
+            {/* <h1 className="my-4 text-5xl font-extrabold tracking-tighter">
               {name}
-            </h1>
+            </h1> */}
           </>
         ) : (
           <>

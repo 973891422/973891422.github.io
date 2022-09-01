@@ -2,8 +2,8 @@
   "Site": {
     "title": "Blog",
     "theme": {
-      "title": "theme",
-      "os": "follow os",
+      "title": "Theme",
+      "os": "os default",
       "normal": "normal",
       "dark": "dark"
     }

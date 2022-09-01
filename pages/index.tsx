@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Date from '../components/date'
 import Layout from '../components/layout'
 import { getSortedPostsData } from '../utils/posts'
-import { useAuthor } from './../context/author-context'
+import { useAuthorContext } from './../context/author-context'
 import { useTranslations } from 'next-intl'
 import Theme from '../components/Theme'
 
@@ -32,7 +32,7 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ allPostsData }) => {
-  const { author } = useAuthor()
+  const { author } = useAuthorContext()
   const t = useTranslations('Site')
 
   return (
@@ -43,9 +43,9 @@ const Home: NextPage<Props> = ({ allPostsData }) => {
         </Head>
 
         <section className="text-center text-xl leading-normal">
-          <p>你好，我是 Furia</p>
+          <p>{author}</p>
 
-          <p>一个又菜又爱玩的前端小白，欢迎来到我的{t('title')}！</p>
+          <p>{t('title')}</p>
         </section>
         <Theme></Theme>
 

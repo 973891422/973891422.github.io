@@ -17,7 +17,7 @@ const initialContextValue = {
 
 const AuthorContext = createContext<AuthorContextType>(initialContextValue)
 
-export function useAuthor() {
+export function useAuthorContext() {
   return useContext(AuthorContext)
 }
 
