@@ -4,7 +4,7 @@
     "theme": {
       "title": "Theme",
       "os": "os default",
-      "normal": "normal",
+      "light": "light",
       "dark": "dark"
     }
   }
