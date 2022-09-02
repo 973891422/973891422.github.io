@@ -5,7 +5,7 @@ export const enum ThemeType {
   Light = 'light',
   Dark = 'dark',
 }
-const THEMES = [ThemeType.OsDefault, ThemeType.Light, ThemeType.Dark]
+const THEMES = [ThemeType.OsDefault, ThemeType.Light, ThemeType.Dark] as const
 
 export function useTheme() {
   const getTheme = () => {

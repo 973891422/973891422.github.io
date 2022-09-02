@@ -37,7 +37,12 @@ export default function Theme() {
       >
         {THEMES.map((item) => (
           <li key={item}>
-            <button onClick={() => setTheme(item)}>
+            <button
+              onClick={() => setTheme(item)}
+              className={
+                '' + (theme === item ? 'bg-violet-600 text-slate-200' : '')
+              }
+            >
               <FontAwesomeIcon
                 className="h-6 w-6 text-blue-500"
                 icon={getIconFromTheme(item)}

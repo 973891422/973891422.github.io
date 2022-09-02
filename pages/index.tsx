@@ -7,6 +7,7 @@ import { getSortedPostsData } from '../utils/posts'
 import { useAuthorContext } from './../context/author-context'
 import { useTranslations } from 'next-intl'
 import Theme from '../components/Theme'
+import Language from '../components/Language'
 
 export const getStaticProps: GetStaticProps = async ({
   locale,
@@ -16,9 +17,8 @@ export const getStaticProps: GetStaticProps = async ({
   const allPostsData = getSortedPostsData()
   return {
     props: {
-      messages: (
-        await import(`../messages/${locale ?? defaultLocale ?? 'zh'}.json`)
-      ).default,
+      messages: (await import(`../messages/${locale ?? defaultLocale}.json`))
+        .default,
       allPostsData,
     },
   }
@@ -48,6 +48,7 @@ const Home: NextPage<Props> = ({ allPostsData }) => {
           <p>{t('title')}</p>
         </section>
         <Theme></Theme>
+        <Language></Language>
 
         <section className="pt-4 text-xl leading-normal">
           <h2 className=" my-4 text-2xl font-bold">Blog</h2>
