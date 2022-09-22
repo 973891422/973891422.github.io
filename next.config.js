@@ -6,5 +6,8 @@ const nextConfig = {
     locales: ['zh', 'en'],
     defaultLocale: 'zh',
   },
+  images: {
+    domains: ['cn.bing.com'],
+  },
 }
 module.exports = nextConfig

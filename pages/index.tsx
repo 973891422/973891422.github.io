@@ -8,6 +8,7 @@ import { useAuthorContext } from './../context/author-context'
 import { useTranslations } from 'next-intl'
 import Theme from '../components/Theme'
 import Language from '../components/Language'
+import Image from 'next/image'
 
 export const getStaticProps: GetStaticProps = async ({
   locale,
@@ -49,6 +50,14 @@ const Home: NextPage<Props> = ({ allPostsData }) => {
         </section>
         <Theme></Theme>
         <Language></Language>
+        <Image
+          priority
+          src="https://cn.bing.com/sa/simg/hpb/LaDigue_EN-CA1115245085_1920x1080.jpg"
+          className="rounded-full"
+          height={108}
+          width={108}
+          alt={'s'}
+        />
 
         <section className="pt-4 text-xl leading-normal">
           <h2 className=" my-4 text-2xl font-bold">Blog</h2>

@@ -10,7 +10,9 @@ import { ThemeType, useTheme } from '../utils/useTheme'
 
 export default function Theme() {
   const t = useTranslations('Site.theme')
+
   const { THEMES, theme, setTheme } = useTheme()
+
   const getIconFromTheme = (theme: ThemeType) => {
     switch (theme) {
       case ThemeType.Light:
@@ -31,6 +33,7 @@ export default function Theme() {
         />
         <span className="ml-4">{t('title')}</span>
       </label>
+
       <ul
         tabIndex={0}
         className="dropdown-content menu rounded-box w-52 bg-base-100 p-2 shadow"
