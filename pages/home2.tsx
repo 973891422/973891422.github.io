@@ -1,12 +1,8 @@
 import type { GetStaticProps, NextPage } from 'next'
 import { useState } from 'react'
-
-interface Image {
-  url: string
-  title: string
-  copyright: [string, string]
-  copyrightlink: string
-}
+import Gallery, { BingImageInfo } from '../components/Gallery'
+import Language from '../components/Language'
+import Theme from '../components/Theme'
 
 interface BingImage {
   url: string
@@ -52,7 +48,7 @@ export const getStaticProps: GetStaticProps = async ({
 }
 
 interface Props {
-  images: Image[]
+  images: BingImageInfo[]
 }
 const Home2: NextPage<Props> = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -64,21 +60,14 @@ const Home2: NextPage<Props> = ({ images }) => {
       }}
       className="h-screen w-screen bg-gray-500 bg-cover bg-center bg-no-repeat"
     >
-      <div className="group relative flex">
-        <button
-          className="btn"
-          onClick={() => {
-            setCurrentIndex((currentIndex + 1) % images.length)
-          }}
-        >
-          Button
-        </button>
-        <span
-          className="absolute left-1/2 m-4 mx-auto -translate-x-1/2 translate-y-full rounded-md bg-gray-800 px-1 
-    text-sm text-gray-100 opacity-0 transition-opacity group-hover:opacity-100"
-        >
-          Tooltip
-        </span>
+      <div className="flex justify-end">
+        <Gallery
+          images={images}
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
+        ></Gallery>
+        <Theme></Theme>
+        <Language></Language>
       </div>
     </div>
   )
