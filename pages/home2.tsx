@@ -1,4 +1,5 @@
 import type { GetStaticProps, NextPage } from 'next'
+import { useState } from 'react'
 
 interface Image {
   url: string
@@ -46,7 +47,7 @@ export const getStaticProps: GetStaticProps = async ({
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
     // - At most once every 10 seconds
-    revalidate: 10, // In seconds
+    revalidate: 60 * 60, // In seconds
   }
 }
 
@@ -54,16 +55,31 @@ interface Props {
   images: Image[]
 }
 const Home2: NextPage<Props> = ({ images }) => {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
   return (
     <div
       style={{
-        background: 'url(' + images[0].url + ')',
-        backgroundSize: '100%',
-        backgroundAttachment: 'fixed',
+        backgroundImage: 'url(' + images[currentIndex].url + ')',
       }}
-      className="h-screen w-screen"
+      className="h-screen w-screen bg-gray-500 bg-cover bg-center bg-no-repeat"
     >
-      {images.length}
+      <div className="group relative flex">
+        <button
+          className="btn"
+          onClick={() => {
+            setCurrentIndex((currentIndex + 1) % images.length)
+          }}
+        >
+          Button
+        </button>
+        <span
+          className="absolute left-1/2 m-4 mx-auto -translate-x-1/2 translate-y-full rounded-md bg-gray-800 px-1 
+    text-sm text-gray-100 opacity-0 transition-opacity group-hover:opacity-100"
+        >
+          Tooltip
+        </span>
+      </div>
     </div>
   )
 }
