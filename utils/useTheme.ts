@@ -17,6 +17,7 @@ export function useTheme() {
       return ThemeType.Light
     }
   }
+
   const [theme, setThemeState] = useState(ThemeType.OsDefault)
   const setTheme = (theme: ThemeType) => {
     if (
@@ -43,9 +44,11 @@ export function useTheme() {
     }
     setThemeState(theme)
   }
+
   useEffect(() => {
     setTheme(getTheme())
   })
+
   return {
     THEMES,
     theme,

@@ -9,7 +9,7 @@ import {
 import { ThemeType, useTheme } from '../utils/useTheme'
 
 export default function Theme() {
-  const t = useTranslations('Site.theme')
+  const t = useTranslations('theme')
 
   const { THEMES, theme, setTheme } = useTheme()
 
@@ -25,18 +25,14 @@ export default function Theme() {
   }
 
   return (
-    <div className="dropdown">
-      <label tabIndex={0} className="btn m-1">
-        <FontAwesomeIcon
-          className="h-6 w-6 text-blue-500"
-          icon={getIconFromTheme(theme)}
-        />
-        <span className="ml-4">{t('title')}</span>
+    <div className="dropdown-end dropdown">
+      <label tabIndex={0} className="btn btn-circle btn-sm m-2">
+        <FontAwesomeIcon className="h-6 w-6" icon={getIconFromTheme(theme)} />
       </label>
 
       <ul
         tabIndex={0}
-        className="dropdown-content menu rounded-box w-52 bg-base-100 p-2 shadow"
+        className="dropdown-content menu rounded-box w-40 gap-1 bg-base-100 p-2 shadow"
       >
         {THEMES.map((item) => (
           <li key={item}>
@@ -47,7 +43,7 @@ export default function Theme() {
               }
             >
               <FontAwesomeIcon
-                className="h-6 w-6 text-blue-500"
+                className="h-6 w-6"
                 icon={getIconFromTheme(item)}
               />
               {t(item)}

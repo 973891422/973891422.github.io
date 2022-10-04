@@ -1,11 +1,11 @@
 import { createContext, ReactNode, useContext } from 'react'
 
 type AuthorContextType = {
-  author: 'Furia'
+  author: 'furia'
 }
 
 const initialContextValue = {
-  author: 'Furia',
+  author: 'furia',
 } as const
 
 const AuthorContext = createContext<AuthorContextType>(initialContextValue)

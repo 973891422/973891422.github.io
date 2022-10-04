@@ -1,82 +1,60 @@
 import type { GetStaticProps, NextPage } from 'next'
-import Link from 'next/link'
-import Head from 'next/head'
-import Date from '../components/date'
-import Layout from '../components/layout'
-import { getSortedPostsData } from '../utils/posts'
-import { useAuthorContext } from './../context/author-context'
-import { useTranslations } from 'next-intl'
-import Theme from '../components/Theme'
-import Language from '../components/Language'
-import Image from 'next/image'
 
+import { BingImageInfo } from '../components/bing-gallery'
+import Layout from '../components/layout'
+
+interface BingImage {
+  url: string
+  title: string
+  copyright: string
+  copyrightlink: string
+}
 export const getStaticProps: GetStaticProps = async ({
   locale,
   defaultLocale,
 }) => {
-  // 获取文章列表
-  const allPostsData = getSortedPostsData()
+  // bing官方接口： idx=-1 截至明天， n=8 8张，ensearch=1 英文
+  const enSearsh = (locale ?? defaultLocale) === 'en' ? '1' : '0'
+  const res = await fetch(
+    `https://cn.bing.com/HPImageArchive.aspx?format=js&idx=-1&n=8&mkt=zh-CN&ensearch=${enSearsh}`
+  )
+  const result = await res.json()
+  if (!res.ok) {
+    throw new Error(
+      `Failed to fetch bing API pictures, received status ${res.status}`
+    )
+  }
+  const images = result.images.map((image: BingImage) => {
+    const url = 'https://cn.bing.com' + image.url
+    const title = image.title
+    const copyrightlink = image.copyrightlink
+    const regex = /([^]+) \(([^]+)\)/
+    const arr = regex.exec(image.copyright) ?? ['', '', '']
+    return { url, title, copyrightlink, copyright: [arr[1], arr[2]] }
+  })
+
   return {
     props: {
       messages: (await import(`../messages/${locale ?? defaultLocale}.json`))
         .default,
-      allPostsData,
+      images,
     },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every 10 seconds
+    revalidate: 60 * 60, // In seconds
   }
 }
+
 interface Props {
-  allPostsData: {
-    date: string
-    title: string
-    id: string
-  }[]
+  images: BingImageInfo[]
 }
 
-const Home: NextPage<Props> = ({ allPostsData }) => {
-  const { author } = useAuthorContext()
-  const t = useTranslations('Site')
-
+const Home: NextPage<Props> = ({ images }) => {
   return (
-    <Layout isHome>
-      <div>
-        <Head>
-          <title>{author + "' Blog"}</title>
-        </Head>
-
-        <section className="text-center text-xl leading-normal">
-          <p>{author}</p>
-
-          <p>{t('title')}</p>
-        </section>
-        <Theme></Theme>
-        <Language></Language>
-        <Image
-          priority
-          src="https://cn.bing.com/sa/simg/hpb/LaDigue_EN-CA1115245085_1920x1080.jpg"
-          className="rounded-full"
-          height={108}
-          width={108}
-          alt={'s'}
-        />
-
-        <section className="pt-4 text-xl leading-normal">
-          <h2 className=" my-4 text-2xl font-bold">Blog</h2>
-          <ul>
-            {allPostsData.map(({ id, date, title }) => (
-              <li key={id} className="mb-5">
-                <Link href={`/posts/${id}`}>
-                  <a>{title}</a>
-                </Link>
-                <br />
-                <small>
-                  <Date dateString={date} />
-                </small>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
-    </Layout>
+    <>
+      <Layout images={images}></Layout>
+    </>
   )
 }
 

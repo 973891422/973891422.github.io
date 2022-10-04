@@ -1,75 +1,46 @@
+import { useTranslations } from 'next-intl'
 import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
-const name = 'Furia' // 名称，根据需要修改
-export const siteTitle = "Furia's Blog" // 网站标题，根据需要修改
+import React, { useState } from 'react'
+import { useAuthorContext } from '../context/author-context'
+import BingGallery, { BingImageInfo } from './bing-gallery'
+import Language from './language'
+import Theme from './theme'
 
 interface Props {
   children: React.ReactNode
-  isHome?: boolean
+  images: BingImageInfo[]
 }
 
-export default function Layout({ children, isHome }: Props) {
+export default function Layout({ children, images }: Props) {
+  const { author } = useAuthorContext()
+  const t = useTranslations('site')
+  const [imageIndex, setImageIndex] = useState(0)
   return (
-    <div className="mx-auto mt-12 mb-24 max-w-2xl px-4">
+    <div
+      className="h-screen w-screen bg-zinc-500 bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: 'url(' + images[imageIndex].url + ')',
+      }}
+    >
       <Head>
         <link rel="icon" href="/favicon.ico" />
-        <meta name="description" content="AiljxBlog——Ailjx的博客" />
-        <meta
-          property="og:image"
-          content={`https://og-image.vercel.app/${encodeURI(
-            siteTitle
-          )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
-        />
-        <meta name="og:title" content={siteTitle} />
-        <meta name="twitter:card" content="summary_large_image" />
+        <title>{author + '' + t('title')}</title>
+        <meta charSet="utf-8" />
+        <meta name="author" content={author} />
+        <meta name="description" content={t('description')} />
       </Head>
-      <header className="flex flex-col items-center">
-        {isHome ? (
-          <>
-            {/* <Image
-              priority
-              src="/images/profile.jfif"
-              className="rounded-full"
-              height={144}
-              width={144}
-              alt={name}
-            /> */}
-            {/* <h1 className="my-4 text-5xl font-extrabold tracking-tighter">
-              {name}
-            </h1> */}
-          </>
-        ) : (
-          <>
-            <Link href="/">
-              <a>
-                <Image
-                  priority
-                  src="/images/profile.jfif"
-                  className="rounded-full"
-                  height={108}
-                  width={108}
-                  alt={name}
-                />
-              </a>
-            </Link>
-            <h2 className="my-4 text-2xl">
-              <Link href="/">
-                <a>{name}</a>
-              </Link>
-            </h2>
-          </>
-        )}
+
+      <header className="mr-4 flex justify-end">
+        <BingGallery
+          images={images}
+          index={imageIndex}
+          setIndex={setImageIndex}
+        />
+        <Theme />
+        <Language />
       </header>
+
       <main>{children}</main>
-      {!isHome && (
-        <div className="mt-12">
-          <Link href="/">
-            <a>← Home</a>
-          </Link>
-        </div>
-      )}
     </div>
   )
 }

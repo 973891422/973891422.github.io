@@ -3,8 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   i18n: {
-    locales: ['zh', 'en'],
-    defaultLocale: 'zh',
+    locales: ['zh-CN', 'en'],
+    defaultLocale: 'zh-CN',
   },
   images: {
     domains: ['cn.bing.com'],

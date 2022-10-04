@@ -16,14 +16,14 @@ export default function Language() {
   }
 
   return (
-    <div className="dropdown">
-      <label tabIndex={0} className="btn m-1">
-        <FontAwesomeIcon className="h-6 w-6 text-blue-500" icon={faLanguage} />
+    <div className="dropdown dropdown-end">
+      <label tabIndex={0} className="btn btn-circle btn-sm m-2">
+        <FontAwesomeIcon className="h-6 w-6" icon={faLanguage} />
       </label>
 
       <ul
         tabIndex={0}
-        className="dropdown-content menu rounded-box w-52 bg-base-100 p-2 shadow"
+        className="dropdown-content menu rounded-box w-32 gap-1 bg-base-100 p-2 shadow"
       >
         {router.locales?.map((locale) => (
           <li key={locale}>

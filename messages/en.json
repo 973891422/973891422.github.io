@@ -1,11 +1,12 @@
 {
-  "Site": {
-    "title": "Blog",
-    "theme": {
-      "title": "Theme",
-      "os": "os default",
-      "light": "light",
-      "dark": "dark"
-    }
+  "site": {
+    "title": "'s blog",
+    "description": "一个尝试学习使用各种前端技术的个人博客"
+  },
+  "theme": {
+    "title": "Theme",
+    "os": "os default",
+    "light": "light",
+    "dark": "dark"
   }
 }
