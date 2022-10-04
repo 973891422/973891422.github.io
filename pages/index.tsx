@@ -1,7 +1,9 @@
 import type { GetStaticProps, NextPage } from 'next'
+import { useTranslations } from 'next-intl'
 
 import { BingImageInfo } from '../components/bing-gallery'
 import Layout from '../components/layout'
+import { useAuthorContext } from '../context/author-context'
 
 interface BingImage {
   url: string
@@ -51,9 +53,17 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ images }) => {
+  const { author } = useAuthorContext()
+  const t = useTranslations('site')
   return (
     <>
-      <Layout images={images}></Layout>
+      <Layout images={images}>
+        <section className="text-center text-xl leading-normal">
+          <p>{author}</p>
+
+          <p>{t('title')}</p>
+        </section>
+      </Layout>
     </>
   )
 }

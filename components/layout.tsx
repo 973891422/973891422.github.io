@@ -3,8 +3,8 @@ import Head from 'next/head'
 import React, { useState } from 'react'
 import { useAuthorContext } from '../context/author-context'
 import BingGallery, { BingImageInfo } from './bing-gallery'
-import Language from './language'
-import Theme from './theme'
+import LanguageMenu from './language-menu'
+import ThemeMenu from './theme-menu'
 
 interface Props {
   children: React.ReactNode
@@ -36,8 +36,8 @@ export default function Layout({ children, images }: Props) {
           index={imageIndex}
           setIndex={setImageIndex}
         />
-        <Theme />
-        <Language />
+        <ThemeMenu />
+        <LanguageMenu />
       </header>
 
       <main>{children}</main>
