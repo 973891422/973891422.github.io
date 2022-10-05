@@ -58,7 +58,7 @@ const Home: NextPage<Props> = ({ images }) => {
   const t = useTranslations('site')
 
   useEffect(() => {
-    fetch('https://netease-cloud-music-api-973891422.vercel.app/artist/list')
+    fetch('https://netease-cloud-music-api-973891422.vercel.app/test.html')
       .then((res) => res.json())
       .then((res) => {
         console.log(res)
