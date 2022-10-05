@@ -1,5 +1,6 @@
 import type { GetStaticProps, NextPage } from 'next'
 import { useTranslations } from 'next-intl'
+import { useEffect } from 'react'
 
 import { BingImageInfo } from '../components/bing-gallery'
 import Layout from '../components/layout'
@@ -55,6 +56,14 @@ interface Props {
 const Home: NextPage<Props> = ({ images }) => {
   const { author } = useAuthorContext()
   const t = useTranslations('site')
+
+  useEffect(() => {
+    fetch('https://netease-cloud-music-api-973891422.vercel.app/artist/list')
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res)
+      })
+  })
   return (
     <>
       <Layout images={images}>
