@@ -6,7 +6,7 @@ import {
   faSun,
   faMoon,
 } from '@fortawesome/free-solid-svg-icons'
-import { ThemeType, useTheme } from '../utils/useTheme'
+import { ThemeType, useTheme } from '../hooks/use-theme'
 
 export default function Theme() {
   const t = useTranslations('theme')
@@ -25,7 +25,7 @@ export default function Theme() {
   }
 
   return (
-    <div className="dropdown-end dropdown">
+    <div className="dropdown dropdown-end">
       <label tabIndex={0} className="btn btn-circle btn-sm m-2">
         <FontAwesomeIcon className="h-6 w-6" icon={getIconFromTheme(theme)} />
       </label>

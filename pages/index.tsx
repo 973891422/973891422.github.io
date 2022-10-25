@@ -58,12 +58,12 @@ const Home: NextPage<Props> = ({ images }) => {
   const t = useTranslations('site')
 
   useEffect(() => {
-    fetch('https://netease-cloud-music-api-973891422.vercel.app/test.html')
+    fetch('https://music-api-973891422.vercel.app/search/hot')
       .then((res) => res.json())
       .then((res) => {
         console.log(res)
       })
-  })
+  }, [])
   return (
     <>
       <Layout images={images}>
