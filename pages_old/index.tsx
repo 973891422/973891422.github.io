@@ -4,7 +4,6 @@ import { useEffect } from 'react'
 
 import { BingImageInfo } from '../components/bing-gallery'
 import Layout from '../components/layout'
-import { useAuthorContext } from '../context/author-context'
 
 interface BingImage {
   url: string
@@ -54,7 +53,6 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ images }) => {
-  const { author } = useAuthorContext()
   const t = useTranslations('site')
 
   useEffect(() => {
@@ -68,7 +66,7 @@ const Home: NextPage<Props> = ({ images }) => {
     <>
       <Layout images={images}>
         <section className="text-center text-xl leading-normal">
-          <p>{author}</p>
+          <p>{'test'}</p>
 
           <p>{t('title')}</p>
         </section>
